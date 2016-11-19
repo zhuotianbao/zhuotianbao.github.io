@@ -25,7 +25,7 @@
 
 1234567function resolveJson(result) &amp;#123;    console.log(result.name);&amp;#125;var jsonpScript">
 <meta property="og:image" content="http://i1.piimg.com/567571/7d443896fa2b67c9.png">
-<meta property="og:updated_time" content="2016-11-19T02:01:11.000Z">
+<meta property="og:updated_time" content="2016-11-19T02:22:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="跨域解决方案">
 <meta name="twitter:description" content="JSONP
@@ -194,7 +194,9 @@
 <li>分为 <strong>简单请求</strong> 和 <strong>预检请求</strong> 两大类</li>
 </ul>
 <hr>
-<h2 id="以下的解决方案可以是使用正常的请求，又不需要后端更改代码，依然可以正常跨域请求的"><a href="#以下的解决方案可以是使用正常的请求，又不需要后端更改代码，依然可以正常跨域请求的" class="headerlink" title="以下的解决方案可以是使用正常的请求，又不需要后端更改代码，依然可以正常跨域请求的"></a><strong>以下的解决方案可以是使用正常的请求，又不需要后端更改代码，依然可以正常跨域请求的</strong></h2><h4 id="用Nginx实现简单的前后端分离"><a href="#用Nginx实现简单的前后端分离" class="headerlink" title="用Nginx实现简单的前后端分离"></a>用Nginx实现简单的前后端分离</h4><blockquote>
+<p><strong>以下的解决方案可以是使用正常的请求，又不需要后端更改代码，依然可以正常跨域请求的</strong></p>
+<hr>
+<h4 id="用Nginx实现简单的前后端分离"><a href="#用Nginx实现简单的前后端分离" class="headerlink" title="用Nginx实现简单的前后端分离"></a>用Nginx实现简单的前后端分离</h4><blockquote>
 <p>核心就是安装Nginx，并修改一下设置，将静态资源或数据接口按需分发。如下图：<br><img src="http://i1.piimg.com/567571/7d443896fa2b67c9.png" alt="image"></p>
 </blockquote>
 <ol>
@@ -203,7 +205,10 @@
 <li>启动nginx ，<code>sudo nginx</code>;访问<code>localhost:8080</code> 发现已出现nginx的欢迎页面了。</li>
 <li>配置nginx,在Mac的根目录下，<code>cd usr/local/etc/nginx</code>、<code>vim nginx.conf</code> ，进入编辑nginx.conf，在server的配置中加入以下代码(删掉注释)。保存退出后不要忘了重启Nginx，<code>nginx -s reload</code>,然后就可以愉快的联调了。<a href="http://www.cnblogs.com/xiaogangqq123/archive/2011/03/02/1969006.html" target="_blank" rel="external">Nginx Server详细配置</a></li>
 </ol>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//文件后缀可以根据实际需要添加，基本都是静态文件</div><div class="line"><span class="keyword">location</span> <span class="title">~ .*\.(gif</span>|jpg|jpeg|bmp|png|ico|txt|js|css|html)$ &#123;</div><div class="line">	//你本地的<span class="keyword">node</span><span class="title">服务（即webpack</span>的daServer）IP</div><div class="line">    proxy_pass http://<span class="number">192.168</span>.<span class="number">2.72</span>:<span class="number">8888</span>;</div><div class="line">    proxy_buffering off;</div><div class="line">&#125;</div><div class="line"><span class="keyword">location</span> <span class="title">~ /admin</span>/api/ &#123;</div><div class="line">	//后端童鞋的服务器IP</div><div class="line">    proxy_pass http://<span class="number">192.168</span>.<span class="number">2.96</span>:<span class="number">8080</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//文件后缀可以根据实际需要添加，基本都是静态文件</div><div class="line"><span class="keyword">location</span> <span class="title">~ .*\.(gif</span>|jpg|jpeg|bmp|png|ico|txt|js|css|html)$ &#123;</div><div class="line">	//你本地的<span class="keyword">node</span><span class="title">服务（即webpack</span>的daServer）IP</div><div class="line">    proxy_pass http://<span class="number">192.168</span>.<span class="number">2.72</span>:<span class="number">8888</span>;</div><div class="line">    proxy_buffering off;</div><div class="line">&#125;</div><div class="line"><span class="keyword">location</span> <span class="title">~ /admin</span>/api/ &#123;</div><div class="line">	//后端童鞋的服务器IP</div><div class="line">    proxy_pass http://<span class="number">192.168</span>.<span class="number">2.96</span>:<span class="number">8080</span>;</div><div class="line">&#125;</div><div class="line">//这个方法感觉每次和一个人调都要去更改那个配置，挺麻烦的</div></pre></td></tr></table></figure>
+<hr>
+<p><strong>再后来，又发现了一个比用nginx更加方便的方法，那就是用webpack配置中devServer自带的proxy代理功能</strong></p>
+<hr>
 <h4 id="Proxy-服务端跨域"><a href="#Proxy-服务端跨域" class="headerlink" title="Proxy:服务端跨域"></a>Proxy:服务端跨域</h4><ul>
 <li>使用代理方式跨域更加直接，因为SOP的限制是浏览器实现的。如果请求不是从浏览器发起的，就不存在跨域问题了</li>
 <li>使用本方法跨域步骤如下：<ul>
@@ -212,6 +217,7 @@
 </ul>
 </li>
 </ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 配置服务器</span></div><div class="line">    <span class="attribute">devServer</span>: &#123;</div><div class="line">        <span class="attribute">historyApiFallback</span>: true,</div><div class="line">        <span class="attribute">hot</span>: true,</div><div class="line">        <span class="attribute">inline</span>: true,</div><div class="line">        <span class="attribute">progress</span>: true,</div><div class="line">        <span class="attribute">contentBase</span>: <span class="string">"./app"</span>, <span class="comment">//最好写上，否则报错，难道这里是一个坑？</span></div><div class="line">        <span class="attribute">port</span>: <span class="number">9999</span>,</div><div class="line">        <span class="attribute">proxy</span>: &#123;</div><div class="line">        <span class="string">'/activity/*'</span>:&#123;</div><div class="line">                <span class="attribute">changeOrigin</span>: true,</div><div class="line">                <span class="attribute">target</span>: <span class="string">'https://118.178.109.73'</span>,</div><div class="line">                <span class="attribute">secure</span>: false,</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"><span class="comment">//我可以把所有人的接口一次性配置好，这个代理方法是不是更加简单粗暴呢~~~</span></div></pre></td></tr></table></figure>
 
       
     </div>
