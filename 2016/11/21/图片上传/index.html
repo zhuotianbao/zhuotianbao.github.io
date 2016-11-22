@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="github blog hexo," />
+  <meta name="keywords" content="base64,图片上传,readAsBinaryString,readAsText,readAsDataURL," />
 
 
 
@@ -102,55 +102,136 @@
 
 
 
-<meta name="description" content="绪：想做个个人博客已经许久了，常常这的那的导致始终都没能真正抽点时间去搭建下博客。这几天突然又想起这事，便趁工作之余寻思了起来。以下是我博客的搭建过程，以及搭建过程中遇到的问题。
-第一部分：hexo的配置
-下载安装Nodejs
-使用npm安装hexo
-npm install -g hexo
+<meta name="description" content="base64图片上传
+HTML5的FileReader对象
+
+方法：
 
 
-建立Blog的文件夹，并初始化hexo
-mkdir Blog
-hexo init
+
+方法名
+参数
+描述
 
 
-安装依赖
-npm">
+
+
+readAsBinaryString
+file
+将文件读取为二进制编码
+
+
+readAsText
+file,[encoding]
+将文件读取为文本
+
+
+readAsDataURL
+file
+将文件读取为DataURL
+
+
+abort
+(none)
+终端读取操作
+
+
+
+接口事件：
+
+
+
+事件
+描述">
 <meta property="og:type" content="article">
-<meta property="og:title" content="github搭建个人博客">
-<meta property="og:url" content="http://yoursite.com/2016/11/17/github搭建个人博客/index.html">
+<meta property="og:title" content="图片上传">
+<meta property="og:url" content="http://yoursite.com/2016/11/21/图片上传/index.html">
 <meta property="og:site_name" content="zhuotiabo个人博客">
-<meta property="og:description" content="绪：想做个个人博客已经许久了，常常这的那的导致始终都没能真正抽点时间去搭建下博客。这几天突然又想起这事，便趁工作之余寻思了起来。以下是我博客的搭建过程，以及搭建过程中遇到的问题。
-第一部分：hexo的配置
-下载安装Nodejs
-使用npm安装hexo
-npm install -g hexo
+<meta property="og:description" content="base64图片上传
+HTML5的FileReader对象
+
+方法：
 
 
-建立Blog的文件夹，并初始化hexo
-mkdir Blog
-hexo init
+
+方法名
+参数
+描述
 
 
-安装依赖
-npm">
-<meta property="og:updated_time" content="2016-11-21T08:47:39.000Z">
+
+
+readAsBinaryString
+file
+将文件读取为二进制编码
+
+
+readAsText
+file,[encoding]
+将文件读取为文本
+
+
+readAsDataURL
+file
+将文件读取为DataURL
+
+
+abort
+(none)
+终端读取操作
+
+
+
+接口事件：
+
+
+
+事件
+描述">
+<meta property="og:updated_time" content="2016-11-22T03:30:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="github搭建个人博客">
-<meta name="twitter:description" content="绪：想做个个人博客已经许久了，常常这的那的导致始终都没能真正抽点时间去搭建下博客。这几天突然又想起这事，便趁工作之余寻思了起来。以下是我博客的搭建过程，以及搭建过程中遇到的问题。
-第一部分：hexo的配置
-下载安装Nodejs
-使用npm安装hexo
-npm install -g hexo
+<meta name="twitter:title" content="图片上传">
+<meta name="twitter:description" content="base64图片上传
+HTML5的FileReader对象
+
+方法：
 
 
-建立Blog的文件夹，并初始化hexo
-mkdir Blog
-hexo init
+
+方法名
+参数
+描述
 
 
-安装依赖
-npm">
+
+
+readAsBinaryString
+file
+将文件读取为二进制编码
+
+
+readAsText
+file,[encoding]
+将文件读取为文本
+
+
+readAsDataURL
+file
+将文件读取为DataURL
+
+
+abort
+(none)
+终端读取操作
+
+
+
+接口事件：
+
+
+
+事件
+描述">
 
 
 
@@ -178,13 +259,13 @@ npm">
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/11/17/github搭建个人博客/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/11/21/图片上传/"/>
 
 
 
 
 
-  <title> github搭建个人博客 | zhuotiabo个人博客 </title>
+  <title> 图片上传 | zhuotiabo个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -305,7 +386,7 @@ npm">
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/17/github搭建个人博客/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/21/图片上传/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="zhuotiabo">
@@ -329,7 +410,7 @@ npm">
             
             
               
-                github搭建个人博客
+                图片上传
               
             
           </h1>
@@ -342,8 +423,8 @@ npm">
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-17T23:21:45+08:00">
-                2016-11-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-21T18:55:48+08:00">
+                2016-11-21
               </time>
             
 
@@ -352,6 +433,24 @@ npm">
             
           </span>
 
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/上传图片/" itemprop="url" rel="index">
+                    <span itemprop="name">上传图片</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -378,76 +477,82 @@ npm">
       
 
       
-        <p><strong>绪：</strong>想做个个人博客已经许久了，常常这的那的导致始终都没能真正抽点时间去搭建下博客。这几天突然又想起这事，便趁工作之余寻思了起来。以下是我博客的搭建过程，以及搭建过程中遇到的问题。</p>
-<h4 id="第一部分：hexo的配置"><a href="#第一部分：hexo的配置" class="headerlink" title="第一部分：hexo的配置"></a>第一部分：hexo的配置</h4><ul>
-<li>下载安装Nodejs</li>
-<li>使用npm安装hexo<ul>
-<li><code>npm install -g hexo</code></li>
+        <h2 id="base64图片上传"><a href="#base64图片上传" class="headerlink" title="base64图片上传"></a>base64图片上传</h2><ul>
+<li>HTML5的FileReader对象</li>
 </ul>
-</li>
-<li>建立Blog的文件夹，并初始化hexo<ul>
-<li><code>mkdir Blog</code></li>
-<li><code>hexo init</code></li>
-</ul>
-</li>
-<li>安装依赖<ul>
-<li><code>npm install</code>  </li>
-</ul>
-</li>
-<li>hexo的配置已经基本完成,启动本地服务<ul>
-<li><code>hexo server</code>(hexo默认的端口号是4000) </li>
-<li><code>hexo server -p 8081</code>(改端口号8081)</li>
-</ul>
-</li>
-<li>在github上新建一个repository保存Blog的页面<ul>
-<li>需要注意的是repository 的name有个特别的限定，就是你的github的username.github.io（zhuotianbao.github.io）</li>
-</ul>
-</li>
-<li>修改配置文件(_config.yml)</li>
-</ul>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">deploy</span>:</div><div class="line">  <span class="attribute">type</span>: git</div><div class="line">  <span class="attribute">repository</span>: <span class="attribute">https</span>:<span class="comment">//github.com/zhuotianbao/zhuotianbao.github.io.git</span></div><div class="line">  <span class="attribute">branch</span>: master</div></pre></td></tr></table></figure>
+<p><strong>方法：</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>readAsBinaryString</td>
+<td>file</td>
+<td>将文件读取为二进制编码</td>
+</tr>
+<tr>
+<td>readAsText</td>
+<td>file,[encoding]</td>
+<td>将文件读取为文本</td>
+</tr>
+<tr>
+<td>readAsDataURL</td>
+<td>file</td>
+<td>将文件读取为DataURL</td>
+</tr>
+<tr>
+<td>abort</td>
+<td>(none)</td>
+<td>终端读取操作</td>
+</tr>
+</tbody>
+</table>
+<p><strong>接口事件：</strong></p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>onabort</td>
+<td>中断</td>
+</tr>
+<tr>
+<td>onerror</td>
+<td>出错</td>
+</tr>
+<tr>
+<td>onloadstart</td>
+<td>开始</td>
+</tr>
+<tr>
+<td>onprogress</td>
+<td>正在读取</td>
+</tr>
+<tr>
+<td>onload</td>
+<td>成功读取</td>
+</tr>
+<tr>
+<td>onloadend</td>
+<td>读取完成，无论成功失败</td>
+</tr>
+</tbody>
+</table>
 <ul>
-<li>将Blog部署到Github<ul>
-<li><code>hexo generate</code>(修改过_config.yml或者文章后都要记得执行下该命令)</li>
-<li><code>hexo deploy</code>(将Blog的内容推送到Githu) </li>
+<li>代码</li>
 </ul>
-</li>
-<li>访问<code>https://zhuotianbao.github.io/</code>就可以查看你的Blog内容了</li>
-<li>hexo主题的使用:<ul>
-<li><code>git clone https://github.com/iissnan/hexo-theme-next themes/next</code> </li>
-<li>修改_config.yml的theme项为yilia就可以了</li>
-</ul>
-</li>
-<li>添加新文章<ul>
-<li><code>hexo new articlename</code>(会在source/_posts/articlename.md，编辑该md文件后)</li>
-<li><code>hexo generate</code> 和<code>hexo deploy</code>就可以在github上看到你的新文章</li>
-</ul>
-</li>
-</ul>
-<h4 id="第二部分：Github-SSH-Key配置-在推送文章到Github时，使用ssh进行验证可以免于输入账户和密码"><a href="#第二部分：Github-SSH-Key配置-在推送文章到Github时，使用ssh进行验证可以免于输入账户和密码" class="headerlink" title="第二部分：Github SSH Key配置(在推送文章到Github时，使用ssh进行验证可以免于输入账户和密码)"></a>第二部分：Github SSH Key配置(在推送文章到Github时，使用ssh进行验证可以免于输入账户和密码)</h4><ul>
-<li>配置用户名和邮箱</li>
-</ul>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config user<span class="selector-class">.name</span> <span class="string">"username"</span></div><div class="line">git config user<span class="selector-class">.email</span> <span class="string">"email"</span></div></pre></td></tr></table></figure>
-<ul>
-<li><code>ssh-keygen -t rsa -b 4096 -C &quot;your email&quot;</code>生成公钥和私钥，运行该命令后会有提示的输入信息，可以直接回车跳过。</li>
-<li>添加私钥到ssh。这时有可能ssh-agent没有启动，可以现在Git Bash中运行命令<code>eval &quot;$(ssh-agent -s)</code>来启动，然后运行ssh-add 私钥名称添加私钥。（默认的私钥名称是rsa，如果在生成私钥时设定了名称，就输入上次设定的名称）</li>
-<li>添加公钥到Github的账号。首先使用命令<code>clip &lt; rsa.pub</code> 将公钥的内容复制到剪贴板，然后登录Github，选择settings &gt; SSH Keys &gt; New SSH Key ，将公钥内容粘贴过去，点击 Add New SSH即可。</li>
-<li>验证ssh的配置是否成功。上述步骤完成后，在Git Bash中运行命令<code>ssh git@github.com</code>，根据提示信息判断ssh的配置是否成功。</li>
-</ul>
-<h3 id="第三部分：部分问题可参看：https-hexo-io-docs-troubleshooting-html"><a href="#第三部分：部分问题可参看：https-hexo-io-docs-troubleshooting-html" class="headerlink" title="第三部分：部分问题可参看：https://hexo.io/docs/troubleshooting.html"></a>第三部分：部分问题可参看：<a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">https://hexo.io/docs/troubleshooting.html</a></h3><ul>
-<li>node-sass编译报错：    </li>
-</ul>
-<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">In</span> <span class="keyword">file</span> included from ../src/binding.cpp:<span class="number">3</span>:</div><div class="line">../src/sass_context_wrapper.h:<span class="number">8</span>:<span class="number">10</span>: fatal <span class="literal">error</span>: <span class="symbol">'sass</span>/<span class="keyword">context</span>.h' <span class="keyword">file</span> <span class="keyword">not</span> found</div><div class="line">#include &lt;sass/<span class="keyword">context</span>.h&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">解决方案：</div><div class="line"></div><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>libsass</div></pre></td></tr></table></figure>
-<ul>
-<li>在执行 hexo deploy 后,出现 error deployer not found:git 的错误</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">解决方案：</div><div class="line">npm <span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></div></pre></td></tr></table></figure>
-<h3 id="第四部分：主题的选择"><a href="#第四部分：主题的选择" class="headerlink" title="第四部分：主题的选择"></a>第四部分：主题的选择</h3><p>在主题的选择很纠结了很久，有next,casper,landscape,yilia……但最后比较合胃口的是next和yilia，在这两者之间也决定了很久，最终敲定next主题。</p>
-<ul>
-<li>下载next主题:<code>git clone https://github.com/iissnan/hexo-theme-next themes/next</code></li>
-<li>next主题官网:<code>http://theme-next.iissnan.com/</code></li>
-<li>next主题配置:<code>http://theme-next.iissnan.com/theme-settings.html</code></li>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">&lt;img id=<span class="string">"ImgPr"</span> src=<span class="string">""</span>/&gt;        </div><div class="line">&lt;input <span class="keyword">type</span>=<span class="string">"file"</span> <span class="keyword">class</span>=<span class="string">""</span> id=<span class="string">"inputFile"</span> &gt;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">readAsDataURL</span>(<span class="params">m_this,id</span>)</span>&#123;</div><div class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> m_this.files == <span class="string">'undefined'</span> || <span class="keyword">typeof</span> FileReader == <span class="string">'undefined'</span>) &#123;</div><div class="line">            alert(<span class="string">'当前浏览器不支持图片上传，请改用IE10以上或chrome等最新浏览器。'</span>);</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="keyword">if</span>(!<span class="regexp">/image\/\w+/</span>.test(m_this.files[<span class="number">0</span>].type))&#123;  </div><div class="line">          alert(<span class="string">"请上传图片！"</span>);  </div><div class="line">          <span class="keyword">return</span> <span class="literal">false</span>;  </div><div class="line">      &#125; </div><div class="line"></div><div class="line">      <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</div><div class="line">      reader.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">            <span class="comment">//this.result 返回结果</span></div><div class="line">            $(id).attr(<span class="string">'src'</span>,<span class="keyword">this</span>.result);</div><div class="line">            <span class="comment">//把结果放在img对象中，以备他用    </span></div><div class="line">            <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</div><div class="line">            img.src = result;</div><div class="line">      &#125;</div><div class="line">      reader.readAsDataURL(m_this.files[<span class="number">0</span>]); </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//调用</span></div><div class="line">$(<span class="string">'#inputFile'</span>).on(<span class="string">'change'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> m_this = <span class="keyword">this</span>;</div><div class="line">    readAsDataURL(m_this,<span class="string">'#ImgPr'</span>);                       </div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="HTML5-本地裁剪图片并上传至服务器（老梗）"><a href="#HTML5-本地裁剪图片并上传至服务器（老梗）" class="headerlink" title="HTML5 本地裁剪图片并上传至服务器（老梗）"></a>HTML5 本地裁剪图片并上传至服务器（老梗）</h2><ul>
+<li>参考链接：<a href="https://segmentfault.com/a/1190000000754560#articleHeader0" target="_blank" rel="external">https://segmentfault.com/a/1190000000754560#articleHeader0</a></li>
 </ul>
 
       
@@ -472,7 +577,15 @@ npm">
       
         <div class="post-tags">
           
-            <a href="/tags/github-blog-hexo/" rel="tag"># github blog hexo</a>
+            <a href="/tags/base64/" rel="tag"># base64</a>
+          
+            <a href="/tags/图片上传/" rel="tag"># 图片上传</a>
+          
+            <a href="/tags/readAsBinaryString/" rel="tag"># readAsBinaryString</a>
+          
+            <a href="/tags/readAsText/" rel="tag"># readAsText</a>
+          
+            <a href="/tags/readAsDataURL/" rel="tag"># readAsDataURL</a>
           
         </div>
       
@@ -481,15 +594,15 @@ npm">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/11/21/CSS样式笔记/" rel="next" title="CSS样式笔记">
+                <i class="fa fa-chevron-left"></i> CSS样式笔记
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/19/跨域解决方案/" rel="prev" title="跨域解决方案">
-                跨域解决方案 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -629,7 +742,7 @@ npm">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一部分：hexo的配置"><span class="nav-number">1.</span> <span class="nav-text">第一部分：hexo的配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二部分：Github-SSH-Key配置-在推送文章到Github时，使用ssh进行验证可以免于输入账户和密码"><span class="nav-number">2.</span> <span class="nav-text">第二部分：Github SSH Key配置(在推送文章到Github时，使用ssh进行验证可以免于输入账户和密码)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三部分：部分问题可参看：https-hexo-io-docs-troubleshooting-html"><span class="nav-number"></span> <span class="nav-text">第三部分：部分问题可参看：https://hexo.io/docs/troubleshooting.html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四部分：主题的选择"><span class="nav-number"></span> <span class="nav-text">第四部分：主题的选择</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#base64图片上传"><span class="nav-number">1.</span> <span class="nav-text">base64图片上传</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5-本地裁剪图片并上传至服务器（老梗）"><span class="nav-number">2.</span> <span class="nav-text">HTML5 本地裁剪图片并上传至服务器（老梗）</span></a></li></ol></div>
             
 
           </div>
