@@ -10,7 +10,7 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
+ <link rel="shortcut icon" type="image/x-icon" href="https://eco.alipayobjects.com/cms/images/ivnpyawe/241f9607-03bb-445e-888a-b64ae3145507.jpeg" />
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -134,7 +134,9 @@ hexo init
 
 安装依赖
 npm">
-<meta property="og:updated_time" content="2016-11-21T08:47:39.000Z">
+<meta property="og:image" content="https://eco.alipayobjects.com/cms/images/ivv1oqny/bd198bc3-980f-48b5-8d56-89c35866c469.png">
+<meta property="og:image" content="https://eco.alipayobjects.com/cms/images/ivv1qzwp/a6e9884b-8947-4c99-b506-ca233cfbf228.png">
+<meta property="og:updated_time" content="2016-11-24T14:41:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="github搭建个人博客">
 <meta name="twitter:description" content="绪：想做个个人博客已经许久了，常常这的那的导致始终都没能真正抽点时间去搭建下博客。这几天突然又想起这事，便趁工作之余寻思了起来。以下是我博客的搭建过程，以及搭建过程中遇到的问题。
@@ -151,6 +153,7 @@ hexo init
 
 安装依赖
 npm">
+<meta name="twitter:image" content="https://eco.alipayobjects.com/cms/images/ivv1oqny/bd198bc3-980f-48b5-8d56-89c35866c469.png">
 
 
 
@@ -455,6 +458,17 @@ npm">
 <li>下载next主题:<code>git clone https://github.com/iissnan/hexo-theme-next themes/next</code></li>
 <li>next主题官网:<code>http://theme-next.iissnan.com/</code></li>
 <li>next主题配置:<code>http://theme-next.iissnan.com/theme-settings.html</code></li>
+<li><p>安装多说评论</p>
+<ul>
+<li>登录多说创建站点<br><img src="https://eco.alipayobjects.com/cms/images/ivv1oqny/bd198bc3-980f-48b5-8d56-89c35866c469.png" alt="image"></li>
+<li><p>填写完信息后，点击创建，生成代码<br><img src="https://eco.alipayobjects.com/cms/images/ivv1qzwp/a6e9884b-8947-4c99-b506-ca233cfbf228.png" alt="image"></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>、data-thread-key 我改为<span class="string">[[ site.url ]]</span>_<span class="string">[[ page.title ]]</span> </div><div class="line"><span class="number">2</span>、data-title 我改为<span class="string">[[ page.title ]]</span> </div><div class="line"><span class="number">3</span>、data-url 我改为<span class="string">[[ site.url ]]</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>将代码粘贴到next主题下的:themes/next/layout/_partials/comments.swig文件下</p>
+</li>
+<li>最后在next主题配置文件:themes/next/_config.yml文件下修改<code>duoshuo_shortname:galengao</code>（这个是创建多说站点中那个多说域名值）</li>
+</ul>
+</li>
 </ul>
 
       
@@ -527,6 +541,8 @@ npm">
       </div>
     
   </div>
+  
+
 
 
         </div>
