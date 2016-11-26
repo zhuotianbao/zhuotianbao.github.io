@@ -119,7 +119,7 @@
 
 1234567function resolveJson(result) &amp;#123;    console.log(result.name);&amp;#125;var jsonpScript">
 <meta property="og:image" content="http://i1.piimg.com/567571/7d443896fa2b67c9.png">
-<meta property="og:updated_time" content="2016-11-19T02:22:17.000Z">
+<meta property="og:updated_time" content="2016-11-26T15:11:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="跨域解决方案">
 <meta name="twitter:description" content="JSONP
@@ -371,6 +371,12 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">resolveJson</span>(<span class="params">result</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(result.name);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> jsonpScript= <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</div><div class="line">jsonpScript.type = <span class="string">"text/javascript"</span>;</div><div class="line">jsonpScript.src = <span class="string">"http://www.qiute.com?callbackName=resolveJson"</span>;</div><div class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">"head"</span>)[<span class="number">0</span>].appendChild(jsonpScript);</div></pre></td></tr></table></figure>
 <ul>
 <li>resolveJson 是我们默认注册的回调函数，注意，该函数名需要全局唯一</li>
+<li><strong>友情提示:</strong> （掉坑的经验）<ul>
+<li>用jsonp请求相当于script标签的请求，因此很有可能会走缓存（移动端经常出现），因此可以在每个请求路径后面加上一个随机数让它不走缓存</li>
+<li>jsonp请求只能是GET请求方式，当你设置为POST请求方式时，它会自动转成GET方式去请求</li>
+<li>当你写POST请求方式的jsonp时，在打包压缩会出异常，会出现data请求主体的数据没被带上。解决方案：其一，将POST改为GET，data主体数据不变；其二，将POST改为GET，并且把data主体数据拼接到URL后面</li>
+</ul>
+</li>
 </ul>
 <h4 id="CORS-跨域资源共享"><a href="#CORS-跨域资源共享" class="headerlink" title="CORS:跨域资源共享"></a>CORS:跨域资源共享</h4><ul>
 <li>不同于JSONP，CORS是以Ajax方式进行跨域请求，需要服务端与客户端的同时支持。</li>
