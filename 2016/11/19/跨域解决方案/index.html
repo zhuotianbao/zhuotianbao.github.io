@@ -108,12 +108,10 @@
 <meta property="og:url" content="http://yoursite.com/2016/11/19/跨域解决方案/index.html">
 <meta property="og:site_name" content="zhuotiabo个人博客">
 <meta property="og:description" content="跨域，指的是浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器对JavaScript施加的安全限制。所谓同源是指，域名，协议，端口均相同。">
-<meta property="og:image" content="http://i1.piimg.com/567571/7d443896fa2b67c9.png">
-<meta property="og:updated_time" content="2016-11-27T09:16:52.000Z">
+<meta property="og:updated_time" content="2016-11-28T03:01:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="跨域解决方案">
 <meta name="twitter:description" content="跨域，指的是浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器对JavaScript施加的安全限制。所谓同源是指，域名，协议，端口均相同。">
-<meta name="twitter:image" content="http://i1.piimg.com/567571/7d443896fa2b67c9.png">
 
 
 
@@ -400,14 +398,11 @@
 <hr>
 <p><strong>以下的解决方案可以是使用正常的请求，又不需要后端更改代码，依然可以正常跨域请求的</strong></p>
 <hr>
-<h4 id="用Nginx实现简单的前后端分离"><a href="#用Nginx实现简单的前后端分离" class="headerlink" title="用Nginx实现简单的前后端分离"></a>用Nginx实现简单的前后端分离</h4><blockquote>
-<p>核心就是安装Nginx，并修改一下设置，将静态资源或数据接口按需分发。如下图：<br><img src="http://i1.piimg.com/567571/7d443896fa2b67c9.png" alt="image"></p>
-</blockquote>
-<ol>
+<h4 id="用Nginx实现简单的前后端分离"><a href="#用Nginx实现简单的前后端分离" class="headerlink" title="用Nginx实现简单的前后端分离"></a>用Nginx实现简单的前后端分离</h4><ol>
 <li>首先建议在Mac中安装brew，以后装什么都方便。在命令行中复制如下代码即可：<br><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code>。</li>
 <li>执行 <code>brew search nginx</code> <code>brew install nginx</code> 。</li>
 <li>启动nginx ，<code>sudo nginx</code>;访问<code>localhost:8080</code> 发现已出现nginx的欢迎页面了。</li>
-<li>配置nginx,在Mac的根目录下，<code>cd usr/local/etc/nginx</code>、<code>vim nginx.conf</code> ，进入编辑nginx.conf，在server的配置中加入以下代码(删掉注释)。保存退出后不要忘了重启Nginx，<code>nginx -s reload</code>,然后就可以愉快的联调了。<a href="http://www.cnblogs.com/xiaogangqq123/archive/2011/03/02/1969006.html" target="_blank" rel="external">Nginx Server详细配置</a></li>
+<li>配置nginx,在Mac的根目录下，<code>cd usr/local/etc/nginx</code>、<code>vim nginx.conf</code> ，进入编辑nginx.conf，在server的配置中加入以下代码(删掉注释)。保存退出后不要忘了重启Nginx，<code>nginx -s reload</code>,然后就可以愉快的联调了。</li>
 </ol>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//文件后缀可以根据实际需要添加，基本都是静态文件</div><div class="line"><span class="keyword">location</span> <span class="title">~ .*\.(gif</span>|jpg|jpeg|bmp|png|ico|txt|js|css|html)$ &#123;</div><div class="line">	//你本地的<span class="keyword">node</span><span class="title">服务（即webpack</span>的daServer）IP</div><div class="line">    proxy_pass http://<span class="number">192.168</span>.<span class="number">2.72</span>:<span class="number">8888</span>;</div><div class="line">    proxy_buffering off;</div><div class="line">&#125;</div><div class="line"><span class="keyword">location</span> <span class="title">~ /admin</span>/api/ &#123;</div><div class="line">	//后端童鞋的服务器IP</div><div class="line">    proxy_pass http://<span class="number">192.168</span>.<span class="number">2.96</span>:<span class="number">8080</span>;</div><div class="line">&#125;</div><div class="line">//这个方法感觉每次和一个人调都要去更改那个配置，挺麻烦的</div></pre></td></tr></table></figure>
 <hr>
