@@ -3,6 +3,20 @@
   
     
     <entry>
+      <title><![CDATA[移动端填坑之路]]></title>
+      <url>%2F2016%2F11%2F28%2F%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%A1%AB%E5%9D%91%E4%B9%8B%E8%B7%AF%2F</url>
+      <content type="text"><![CDATA[搞PC项目，最头疼的莫过于做IE6/7/8的兼容性（很蛋疼的事）。而在如今移动端H5的兴起中，面对形形色色的机型，各种各样的品牌手机，导致我吗们FE们要做各种手机适配问题、样式兼容问题等等（巨烦，找问题还不好找）。以下是在移动端项目之路上所遇到的各种问题:]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[react之路]]></title>
+      <url>%2F2016%2F11%2F28%2Freact%E4%B9%8B%E8%B7%AF%2F</url>
+      <content type="text"><![CDATA[事件 键盘事件 名称 1onKeyDown onKeyPress onKeyUp 属性 123456789101112boolean altKeyNumber charCodeboolean ctrlKeyfunction getModifierState(key)String keyNumber keyCodeString localeNumber locationboolean metaKeyboolean repeatboolean shiftKeyNumber which 焦点事件 名称 1onFocus onBlur 属性 1DOMEventTarget relatedTarget 触控事件 1onTouchCancel onTouchEnd onTouchMove onTouchStart 用户界面事件 名称 1onScroll 属性 12Number detailDOMAbstractView view 滚轮事件 名称 1onWheel 属性 1234Number deltaModeNumber deltaXNumber deltaYNumber deltaZ 表单事件 1onChange onInput onSubmit 鼠标事件 123onClick onContextMenu onDoubleClick onDrag onDragEnd onDragEnter onDragExitonDragLeave onDragOver onDragStart onDrop onMouseDown onMouseEnter onMouseLeaveonMouseMove onMouseOut onMouseOver onMouseUp 剪贴板事件 事件名称： 1onCopy onCut onPaste 属性： 1DOMDataTransfer clipboardData]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[时间戳格式化]]></title>
       <url>%2F2016%2F11%2F27%2F%E6%97%B6%E9%97%B4%E6%88%B3%E6%A0%BC%E5%BC%8F%E5%8C%96%2F</url>
       <content type="text"><![CDATA[要是后端传给我们的是时间戳格式时，我们需要将它转换成我们想要的时间格式来展示。要是我们拿到的是格式化后的时间格式时，当我们想要进行两个时间的对比时，我们需要将格式化后的时间先转换成时间戳才能进行比较。以下是时间戳与格式化时间之间的互相转换: 时间戳转换成格式化的时间 方式一: 12345678910111213141516171819202122 userDate = (uData,form) =&gt; &#123; var myDate = new Date(uData); var year = myDate.getFullYear(); var month = myDate.getMonth() + 1; var day = myDate.getDate(); var hours = myDate.getHours(); var minutes = myDate.getMinutes(); var second = myDate.getSeconds(); //本地当前时间 var curTime = new Date(); var today = curTime.getFullYear()+"-"+(curTime.getMonth()+1)+"-"+curTime.getDate(); if(form=='yy-mm-dd hh:mm')&#123; return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes; &#125;else if(form=='yy-mm-dd hh:mm:ss')&#123; if(today == (year+'-'+month+'-'+day))&#123; return '今天' + ' ' + hours + ':' + minutes + ":" +second; &#125; return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ":" +second; &#125; &#125; this.userDate(aaaaaaa,'yy-mm-dd hh:mm:ss');//毫秒数级别 方式二: 1234567891011121314151617181920212223format = (timestamp,format) =&gt; &#123; let newDate = new Date(timestamp); let date = &#123; "M+": this.getMonth() + 1, "d+": this.getDate(), "h+": this.getHours(), "m+": this.getMinutes(), "s+": this.getSeconds(), "q+": Math.floor((this.getMonth() + 3) / 3), "S+": this.getMilliseconds() &#125;; if (/(y+)/i.test(format)) &#123; format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length)); &#125; for (let k in date) &#123; if (new RegExp("(" + k + ")").test(format)) &#123; format = format.replace(RegExp.$1, RegExp.$1.length == 1? date[k] : ("00" + date[k]).substr(("" + date[k]).length)); &#125; &#125; return format;&#125; this.format('1480176000000','yyyy-MM-dd hh:mm:ss');//毫秒数级别 格式化的时间转换成时间戳123456// 获取当前时间戳(**以s为单位**)var date = new Date()var timestamp = Date.parse(date);timestamp = timestamp / 1000;//当前时间戳为：1403149534console.log("当前时间戳为：" + timestamp);]]></content>
