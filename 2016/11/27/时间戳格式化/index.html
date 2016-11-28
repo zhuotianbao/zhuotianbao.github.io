@@ -16,7 +16,6 @@
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<meta name="baidu-site-verification" content="b8g83aPMY9" />
 
 
 
@@ -103,13 +102,16 @@
 
 
 
+<meta name="description" content="要是后端传给我们的是时间戳格式时，我们需要将它转换成我们想要的时间格式来展示。要是我们拿到的是格式化后的时间格式时，当我们想要进行两个时间的对比时，我们需要将格式化后的时间先转换成时间戳才能进行比较。以下是时间戳与格式化时间之间的互相转换:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="时间戳格式化">
 <meta property="og:url" content="http://yoursite.com/2016/11/27/时间戳格式化/index.html">
 <meta property="og:site_name" content="zhuotiabo个人博客">
-<meta property="og:updated_time" content="2016-11-27T11:45:10.000Z">
+<meta property="og:description" content="要是后端传给我们的是时间戳格式时，我们需要将它转换成我们想要的时间格式来展示。要是我们拿到的是格式化后的时间格式时，当我们想要进行两个时间的对比时，我们需要将格式化后的时间先转换成时间戳才能进行比较。以下是时间戳与格式化时间之间的互相转换:">
+<meta property="og:updated_time" content="2016-11-28T02:55:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="时间戳格式化">
+<meta name="twitter:description" content="要是后端传给我们的是时间戳格式时，我们需要将它转换成我们想要的时间格式来展示。要是我们拿到的是格式化后的时间格式时，当我们想要进行两个时间的对比时，我们需要将格式化后的时间先转换成时间戳才能进行比较。以下是时间戳与格式化时间之间的互相转换:">
 
 
 
@@ -372,7 +374,17 @@
       
 
       
-        <a id="more"></a>
+        <p>要是后端传给我们的是时间戳格式时，我们需要将它转换成我们想要的时间格式来展示。要是我们拿到的是格式化后的时间格式时，当我们想要进行两个时间的对比时，我们需要将格式化后的时间先转换成时间戳才能进行比较。以下是时间戳与格式化时间之间的互相转换:</p>
+<a id="more"></a>
+<h3 id="时间戳转换成格式化的时间"><a href="#时间戳转换成格式化的时间" class="headerlink" title="时间戳转换成格式化的时间"></a>时间戳转换成格式化的时间</h3><ul>
+<li><p>方式一:</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"> userDate = (uData,form) =&gt; &#123;</div><div class="line">        var myDate = <span class="keyword">new</span> Date(uData);</div><div class="line">        var <span class="built_in">year</span> = myDate.getFullYear();</div><div class="line">        var <span class="built_in">month</span> = myDate.getMonth() + <span class="number">1</span>;</div><div class="line">        var <span class="built_in">day</span> = myDate.getDate();</div><div class="line">        var hours = myDate.getHours();</div><div class="line">        var minutes = myDate.getMinutes();</div><div class="line">        var <span class="built_in">second</span> = myDate.getSeconds();</div><div class="line">        <span class="comment">//本地当前时间</span></div><div class="line">        var curTime = <span class="keyword">new</span> Date();</div><div class="line">        var today = curTime.getFullYear()+<span class="string">"-"</span>+(curTime.getMonth()+<span class="number">1</span>)+<span class="string">"-"</span>+curTime.getDate();</div><div class="line">        <span class="keyword">if</span>(form==<span class="string">'yy-mm-dd hh:mm'</span>)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="built_in">year</span> + <span class="string">'-'</span> + <span class="built_in">month</span> + <span class="string">'-'</span> + <span class="built_in">day</span> + <span class="string">' '</span> + hours + <span class="string">':'</span> + minutes;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(form==<span class="string">'yy-mm-dd hh:mm:ss'</span>)&#123;</div><div class="line">            <span class="keyword">if</span>(today == (<span class="built_in">year</span>+<span class="string">'-'</span>+<span class="built_in">month</span>+<span class="string">'-'</span>+<span class="built_in">day</span>))&#123;</div><div class="line">                <span class="keyword">return</span> <span class="string">'今天'</span> + <span class="string">' '</span> + hours + <span class="string">':'</span> + minutes + <span class="string">":"</span> +<span class="built_in">second</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="built_in">year</span> + <span class="string">'-'</span> + <span class="built_in">month</span> + <span class="string">'-'</span> + <span class="built_in">day</span> + <span class="string">' '</span> + hours + <span class="string">':'</span> + minutes + <span class="string">":"</span> +<span class="built_in">second</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line"><span class="keyword">this</span>.userDate(aaaaaaa,<span class="string">'yy-mm-dd hh:mm:ss'</span>);<span class="comment">//毫秒数级别</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>方式二:</p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">format = (timestamp,format) =&gt; &#123;</div><div class="line">	<span class="keyword">let</span> newDate = <span class="keyword">new</span> <span class="built_in">Date</span>(timestamp);</div><div class="line">	<span class="keyword">let</span> <span class="built_in">date</span> = &#123;</div><div class="line">	    <span class="string">"M+"</span>: <span class="keyword">this</span>.getMonth() + <span class="number">1</span>,</div><div class="line">	    <span class="string">"d+"</span>: <span class="keyword">this</span>.getDate(),</div><div class="line">	    <span class="string">"h+"</span>: <span class="keyword">this</span>.getHours(),</div><div class="line">        <span class="string">"m+"</span>: <span class="keyword">this</span>.getMinutes(),</div><div class="line">	    <span class="string">"s+"</span>: <span class="keyword">this</span>.getSeconds(),</div><div class="line">	    <span class="string">"q+"</span>: <span class="built_in">Math</span>.floor((<span class="keyword">this</span>.getMonth() + <span class="number">3</span>) / <span class="number">3</span>),</div><div class="line">	    <span class="string">"S+"</span>: <span class="keyword">this</span>.getMilliseconds()</div><div class="line">   &#125;;</div><div class="line">   <span class="keyword">if</span> (<span class="regexp">/(y+)/i</span>.test(format)) &#123;</div><div class="line">        format = format.replace(<span class="built_in">RegExp</span>.$<span class="number">1</span>, (<span class="keyword">this</span>.getFullYear() + <span class="string">''</span>).substr(<span class="number">4</span> - <span class="built_in">RegExp</span>.$<span class="number">1.</span>length));</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">for</span> (<span class="keyword">let</span> k <span class="keyword">in</span> <span class="built_in">date</span>) &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"("</span> + k + <span class="string">")"</span>).test(format)) &#123;</div><div class="line">            format = format.replace(<span class="built_in">RegExp</span>.$<span class="number">1</span>, <span class="built_in">RegExp</span>.$<span class="number">1.</span>length == <span class="number">1</span>? <span class="built_in">date</span>[k] : (<span class="string">"00"</span> + <span class="built_in">date</span>[k]).substr((<span class="string">""</span> + <span class="built_in">date</span>[k]).length));</div><div class="line">        &#125;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">return</span> format;</div><div class="line">&#125;</div><div class="line">    </div><div class="line"><span class="keyword">this</span>.format(<span class="string">'1480176000000'</span>,<span class="string">'yyyy-MM-dd hh:mm:ss'</span>);<span class="comment">//毫秒数级别</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="格式化的时间转换成时间戳"><a href="#格式化的时间转换成时间戳" class="headerlink" title="格式化的时间转换成时间戳"></a>格式化的时间转换成时间戳</h3><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取当前时间戳(**以s为单位**)</span></div><div class="line"><span class="built_in">var</span> <span class="built_in">date</span> = <span class="literal">new</span> <span class="built_in">Date</span>()</div><div class="line"><span class="built_in">var</span> timestamp = <span class="built_in">Date</span>.parse(<span class="built_in">date</span>);</div><div class="line">timestamp = timestamp / <span class="number">1000</span>;</div><div class="line"><span class="comment">//当前时间戳为：1403149534</span></div><div class="line">console.<span class="keyword">log</span>(<span class="string">"当前时间戳为："</span> + timestamp);</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -488,8 +500,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://eco.alipayobjects.com/cms/images/ivnpyawe/241f9607-03bb-445e-888a-b64ae3145507.jpeg"
@@ -562,6 +583,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#时间戳转换成格式化的时间"><span class="nav-number">1.</span> <span class="nav-text">时间戳转换成格式化的时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化的时间转换成时间戳"><span class="nav-number">2.</span> <span class="nav-text">格式化的时间转换成时间戳</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
