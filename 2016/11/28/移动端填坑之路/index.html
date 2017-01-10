@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/11/28/移动端填坑之路/index.html">
 <meta property="og:site_name" content="zhuotiabo个人博客">
 <meta property="og:description" content="搞PC项目，最头疼的莫过于做IE6/7/8的兼容性（很蛋疼的事）。而在如今移动端H5的兴起中，面对形形色色的机型，各种各样的品牌手机，导致我吗们FE们要做各种手机适配问题、样式兼容问题等等（巨烦，找问题还不好找）。以下是在移动端项目之路上所遇到的各种问题:">
-<meta property="og:updated_time" content="2016-11-28T15:33:42.000Z">
+<meta property="og:updated_time" content="2016-12-24T02:34:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动端填坑之路">
 <meta name="twitter:description" content="搞PC项目，最头疼的莫过于做IE6/7/8的兼容性（很蛋疼的事）。而在如今移动端H5的兴起中，面对形形色色的机型，各种各样的品牌手机，导致我吗们FE们要做各种手机适配问题、样式兼容问题等等（巨烦，找问题还不好找）。以下是在移动端项目之路上所遇到的各种问题:">
@@ -376,6 +376,20 @@
       
         <p>搞PC项目，最头疼的莫过于做IE6/7/8的兼容性（很蛋疼的事）。而在如今移动端H5的兴起中，面对形形色色的机型，各种各样的品牌手机，导致我吗们FE们要做各种手机适配问题、样式兼容问题等等（巨烦，找问题还不好找）。以下是在移动端项目之路上所遇到的各种问题:</p>
 <a id="more"></a>
+<h3 id="UC浏览器——css3的坑"><a href="#UC浏览器——css3的坑" class="headerlink" title="UC浏览器——css3的坑"></a>UC浏览器——css3的坑</h3><p>最近在做一个移动端项目，涉及到评论模块，有评论必有点赞功能，当然也就存在点赞动画效果，第一反应就是利用css3动画效果。</p>
+<p>方案一:transition+伪元素 。方案二:transition。方案呢三:animation+伪元素。方案呢四:animation。<br>背景:项目最终是放在支付宝平台上的，而支付宝用的是UC内核。<br>在chrome、qq、微信等等打开都是没问题（perfect，以为大功告成了…），谁知最后在支付宝（uc内核）打开…方案一/方案二/方案三都是一点效果都没有（这是针对安卓手机没效果，对于IOS效果还是有的，可见乔布斯的强大啊）…呜呜呜…天啊，这是咋回事呢？</p>
+<p><strong>总结:</strong>在UC浏览器中，不支持伪元素使用css3动画，对于transition动画也不佳。提倡使用方案四…</p>
+<h3 id="css动画请使用transform"><a href="#css动画请使用transform" class="headerlink" title="css动画请使用transform"></a>css动画请使用transform</h3><ul>
+<li>当我们使用css3的时候尽量使用transform，而非直接控制width,height,margin，否则会造成大量的计算，性能堪忧。transfrom会把元素独立出来单独计算的。</li>
+</ul>
+<h3 id="页面底部放一个position为fixed的input输入框"><a href="#页面底部放一个position为fixed的input输入框" class="headerlink" title="页面底部放一个position为fixed的input输入框"></a>页面底部放一个position为fixed的input输入框</h3><ul>
+<li>IOS手机上，当input聚焦后输入框会飞（被输入法顶上去后并不是紧贴输入法而是定位在正中间，而且位置可以被我们随便上下移动），没法实现我们想要的</li>
+<li>安卓手机上是正常的</li>
+</ul>
+<h3 id="scroll滚动事件"><a href="#scroll滚动事件" class="headerlink" title="scroll滚动事件"></a>scroll滚动事件</h3><ul>
+<li>qq浏览，uc浏览以及ios的浏览器，滚动时并不会时时触发scroll事件，但会触发touchmove。只有当停止滚动后才会触发scroll。</li>
+<li>在安卓手机上相对来说好很多</li>
+</ul>
 
       
     </div>
@@ -417,6 +431,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/10/setState同步更新方法/" rel="prev" title="setState同步更新方法">
+                setState同步更新方法 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -492,8 +510,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://eco.alipayobjects.com/cms/images/ivnpyawe/241f9607-03bb-445e-888a-b64ae3145507.jpeg"
@@ -504,7 +531,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -567,6 +594,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#UC浏览器——css3的坑"><span class="nav-number">1.</span> <span class="nav-text">UC浏览器——css3的坑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css动画请使用transform"><span class="nav-number">2.</span> <span class="nav-text">css动画请使用transform</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页面底部放一个position为fixed的input输入框"><span class="nav-number">3.</span> <span class="nav-text">页面底部放一个position为fixed的input输入框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scroll滚动事件"><span class="nav-number">4.</span> <span class="nav-text">scroll滚动事件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
     </div>
   </aside>
@@ -581,7 +624,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
