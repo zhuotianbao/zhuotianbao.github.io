@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/02/17/css垂直居中/index.html">
 <meta property="og:site_name" content="zhuotiabo个人博客">
 <meta property="og:description" content="有时候我们要让一个DIV垂直居中，有时该DIV的宽高都是不确定的，有时宽高是确定的，那么我们如何让它垂直居中呢？接下来我们将要从传统方式，css3，以及最新的flex布局等方法去达到我们想要的效果。">
-<meta property="og:updated_time" content="2017-02-17T09:26:18.000Z">
+<meta property="og:updated_time" content="2017-02-19T03:12:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css垂直居中">
 <meta name="twitter:description" content="有时候我们要让一个DIV垂直居中，有时该DIV的宽高都是不确定的，有时宽高是确定的，那么我们如何让它垂直居中呢？接下来我们将要从传统方式，css3，以及最新的flex布局等方法去达到我们想要的效果。">
@@ -376,12 +376,27 @@
       
         <p>有时候我们要让一个DIV垂直居中，有时该DIV的宽高都是不确定的，有时宽高是确定的，那么我们如何让它垂直居中呢？接下来我们将要从传统方式，css3，以及最新的flex布局等方法去达到我们想要的效果。</p>
 <a id="more"></a>
-<figure class="highlight plain"><figcaption><span>class='box'><div class="center">center</div>```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 当center的宽度高度都由内容自撑开时</div><div class="line">- 利用css3属性</div></pre></td></tr></table></figure>
-<p>.box{<br>  width:200px;<br>  height:200px;<br>  background-color:red;<br>  position:relative;<br>}<br>.center{<br>  background-color:green;<br>  top:50%;<br>  left:50%;<br>  position:absolute;<br>  transform:translate(-50%,-50%);<br>}<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">- </span>利用flex布局</div></pre></td></tr></table></figure></p>
-<p>.box{<br>  width:200px;<br>  height:200px;<br>  background-color:red;<br>  display: flex;<br>  justify-content:center;  //水平方向居中<br>  align-items: center;  //垂直方向居中<br>}<br>.center{<br>  background-color:green;<br>}<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- 利用<span class="keyword">table</span>-cell属性</div></pre></td></tr></table></figure></p>
-<p>.box{<br>  width:200px;<br>  height:200px;<br>  background-color:red;<br>  display: table-cell;<br>  vertical-align:middle;<br>  text-align:center;<br>}<br>.center{<br>  background-color:green;<br>  display:inline-block;<br>}<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#### 当center的宽度高度都固定时</div><div class="line">- 自适应</div></pre></td></tr></table></figure></p>
-<p>.box{<br>  width:200px;<br>  height:200px;<br>  background-color:red;<br>  position:relative;<br>}<br>.center{<br>  width:50px;<br>  height:50px;<br>  background-color:green;<br>  position: absolute;<br>  margin:auto;<br>  left:0;<br>  top:0;<br>  right:0;<br>  bottom:0;<br>}<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">- </span>非自适应</div></pre></td></tr></table></figure></p>
-<p>.box{<br>  width:200px;<br>  height:200px;<br>  background-color:red;<br>  position:relative;<br>}<br>.center{<br>  width:50px;<br>  height:50px;<br>  background-color:green;<br>  position: absolute;<br>  margin:auto;<br>  left:50%;<br>  top:50%;<br>  margin-left:-25px;<br>  margin-top:-25px;<br>}<br>```</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"box"</span>&gt;</div><div class="line">  &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"center"</span>&gt;center&lt;/<span class="keyword">div</span>&gt;</div><div class="line">&lt;/<span class="keyword">div</span>&gt;</div></pre></td></tr></table></figure>
+<h4 id="当center的宽度高度都由内容自撑开时"><a href="#当center的宽度高度都由内容自撑开时" class="headerlink" title="当center的宽度高度都由内容自撑开时"></a>当center的宽度高度都由内容自撑开时</h4><ul>
+<li>利用css3属性</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.box</span>&#123;</div><div class="line">  <span class="attribute">width</span>:<span class="number">200px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">200px</span>;</div><div class="line">  <span class="attribute">background-color</span>:red;</div><div class="line">  <span class="attribute">position</span>:relative;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.center</span>&#123;</div><div class="line">  <span class="attribute">background-color</span>:green;</div><div class="line">  <span class="attribute">top</span>:<span class="number">50%</span>;</div><div class="line">  <span class="attribute">left</span>:<span class="number">50%</span>;</div><div class="line">  <span class="attribute">position</span>:absolute;</div><div class="line">  <span class="attribute">transform</span>:<span class="built_in">translate</span>(-50%,-50%);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>利用flex布局</li>
+</ul>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.box</span>&#123;</div><div class="line">  <span class="attribute">width</span>:<span class="number">200px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">200px</span>;</div><div class="line">  <span class="attribute">background-color</span>:red;</div><div class="line">  <span class="attribute">display</span>: flex;</div><div class="line">  <span class="attribute">justify-content</span>:center;  <span class="comment">//水平方向居中</span></div><div class="line">  <span class="attribute">align-items</span>: center;  <span class="comment">//垂直方向居中</span></div><div class="line">&#125;</div><div class="line"><span class="selector-class">.center</span>&#123;</div><div class="line">  <span class="attribute">background-color</span>:green;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>利用table-cell属性</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.box</span>&#123;</div><div class="line">  <span class="attribute">width</span>:<span class="number">200px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">200px</span>;</div><div class="line">  <span class="attribute">background-color</span>:red;</div><div class="line">  <span class="attribute">display</span>: table-cell;</div><div class="line">  <span class="attribute">vertical-align</span>:middle;</div><div class="line">  <span class="attribute">text-align</span>:center;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.center</span>&#123;</div><div class="line">  <span class="attribute">background-color</span>:green;</div><div class="line">  <span class="attribute">display</span>:inline-block;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="当center的宽度高度都固定时"><a href="#当center的宽度高度都固定时" class="headerlink" title="当center的宽度高度都固定时"></a>当center的宽度高度都固定时</h4><ul>
+<li>自适应</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.box</span>&#123;</div><div class="line">  <span class="attribute">width</span>:<span class="number">200px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">200px</span>;</div><div class="line">  <span class="attribute">background-color</span>:red;</div><div class="line">  <span class="attribute">position</span>:relative; </div><div class="line">&#125;</div><div class="line"><span class="selector-class">.center</span>&#123;</div><div class="line">  <span class="attribute">width</span>:<span class="number">50px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">50px</span>;</div><div class="line">  <span class="attribute">background-color</span>:green;</div><div class="line">  <span class="attribute">position</span>: absolute;</div><div class="line">  <span class="attribute">margin</span>:auto;</div><div class="line">  <span class="attribute">left</span>:<span class="number">0</span>;</div><div class="line">  <span class="attribute">top</span>:<span class="number">0</span>;</div><div class="line">  <span class="attribute">right</span>:<span class="number">0</span>;</div><div class="line">  <span class="attribute">bottom</span>:<span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>非自适应</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.box</span>&#123;</div><div class="line">  <span class="attribute">width</span>:<span class="number">200px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">200px</span>;</div><div class="line">  <span class="attribute">background-color</span>:red;</div><div class="line">  <span class="attribute">position</span>:relative; </div><div class="line">&#125;</div><div class="line"><span class="selector-class">.center</span>&#123;</div><div class="line">  <span class="attribute">width</span>:<span class="number">50px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">50px</span>;</div><div class="line">  <span class="attribute">background-color</span>:green;</div><div class="line">  <span class="attribute">position</span>: absolute;</div><div class="line">  <span class="attribute">margin</span>:auto;</div><div class="line">  <span class="attribute">left</span>:<span class="number">50%</span>;</div><div class="line">  <span class="attribute">top</span>:<span class="number">50%</span>;</div><div class="line">  <span class="attribute">margin-left</span>:-<span class="number">25px</span>;</div><div class="line">  <span class="attribute">margin-top</span>:-<span class="number">25px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -498,8 +513,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://eco.alipayobjects.com/cms/images/ivnpyawe/241f9607-03bb-445e-888a-b64ae3145507.jpeg"
@@ -572,6 +596,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#当center的宽度高度都由内容自撑开时"><span class="nav-number">1.</span> <span class="nav-text">当center的宽度高度都由内容自撑开时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#当center的宽度高度都固定时"><span class="nav-number">2.</span> <span class="nav-text">当center的宽度高度都固定时</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
