@@ -110,7 +110,7 @@
 <meta property="og:description" content="之前关于webpack的配置都是用在单项目中，最近有个需求就是将两个相近的项目要整合成一个工程，抽取公共组件、公共js、公共css等等，同时要方便后面项目的扩展。这时，就要对构建工具webpack进行重新配置，以便达到后面新增项目进来仍不需更改webpack配置文件的效果。">
 <meta property="og:image" content="http://yoursite.com/webpack.jpeg">
 <meta property="og:image" content="http://yoursite.com/output.png">
-<meta property="og:updated_time" content="2017-05-10T06:29:58.000Z">
+<meta property="og:updated_time" content="2017-05-10T06:33:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="建立一个多项目工程的webpack配置">
 <meta name="twitter:description" content="之前关于webpack的配置都是用在单项目中，最近有个需求就是将两个相近的项目要整合成一个工程，抽取公共组件、公共js、公共css等等，同时要方便后面项目的扩展。这时，就要对构建工具webpack进行重新配置，以便达到后面新增项目进来仍不需更改webpack配置文件的效果。">
@@ -391,6 +391,23 @@
 <li><code>common</code>目录放的是公共的css/js，<code>assets</code>目录下放的是图片，<code>op</code>目录下放的是<code>op</code>项目的代码，<code>evs</code>目录下放的<code>evs</code>项目的代码，<code>index.html</code>是工程根目录下的页面</li>
 <li>其中<code>evs/op</code>项目下都有自己的<code>index.html</code>文件</li>
 </ul>
+<h3 id="webpack-json中的命令"><a href="#webpack-json中的命令" class="headerlink" title="webpack.json中的命令"></a>webpack.json中的命令</h3><ul>
+<li><code>webpack-dev-server --hot --inline</code>完成自动刷新</li>
+<li>默认是根据webpack.config.js打包文件，通过<code>--config xxxx.js</code>修改</li>
+<li>根目录中去查找内容，通过<code>--content-base</code>可以配置根目录。如<code>webpack-dev-server --hot --inline --content-base &#39;./build/&#39;</code>，在<code>build</code>文件夹中去加载<code>index.html</code>，如果没<code>index.html</code>文件，将会在浏览器中显示所有<code>build</code>目录下的文件和文件夹</li>
+</ul>
+<h3 id="部分属性的配置"><a href="#部分属性的配置" class="headerlink" title="部分属性的配置"></a>部分属性的配置</h3><h5 id="resolve的定义"><a href="#resolve的定义" class="headerlink" title="resolve的定义"></a><code>resolve</code>的定义</h5><ul>
+<li><code>alias</code>别名(alias)的定义</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">resolve</span>: &#123; </div><div class="line">  <span class="attribute">alias</span>:&#123;</div><div class="line">    xyz: <span class="string">"/absolute/path/to/file.js"</span> </div><div class="line">  &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>extensions</code>对象，使得开发过程中文件资源的处理可以忽略后缀</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">resolve</span>: &#123; </div><div class="line">  <span class="comment">//配置项,设置忽略js后缀 </span></div><div class="line">  <span class="attribute">extensions</span>: [<span class="string">''</span>, <span class="string">'.js'</span>, <span class="string">'.less'</span>, <span class="string">'.css'</span>, <span class="string">'.png'</span>, <span class="string">'.jpg'</span>], </div><div class="line">  <span class="attribute">root</span>: <span class="string">'./src'</span>,</div><div class="line">  <span class="comment">// 模块别名 </span></div><div class="line">  <span class="attribute">alias</span>: &#123;&#125; </div><div class="line"><span class="selector-tag">z</span>&#125;</div></pre></td></tr></table></figure>
+<h5 id="externals配置"><a href="#externals配置" class="headerlink" title="externals配置"></a><code>externals</code>配置</h5><ul>
+<li>不需要打包的模块</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">externals: &#123;</div><div class="line">    <span class="string">"react"</span>: <span class="string">'React'</span>,</div><div class="line">    <span class="string">"react-dom"</span>: <span class="string">"ReactDOM"</span>,</div><div class="line">    <span class="string">"zepto"</span>: <span class="string">"Zepto"</span></div><div class="line">&#125;</div><div class="line"><span class="regexp">//</span>react<span class="regexp">/react-dom/</span>zepto模块将不会被打包进去</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -600,7 +617,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#下面是最后想要的工程目录："><span class="nav-number">1.</span> <span class="nav-text">下面是最后想要的工程目录：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附上我们的webpack配置文件的代码："><span class="nav-number">2.</span> <span class="nav-text">附上我们的webpack配置文件的代码：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打包编译后的文件目录如下："><span class="nav-number">3.</span> <span class="nav-text">打包编译后的文件目录如下：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#下面是最后想要的工程目录："><span class="nav-number">1.</span> <span class="nav-text">下面是最后想要的工程目录：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附上我们的webpack配置文件的代码："><span class="nav-number">2.</span> <span class="nav-text">附上我们的webpack配置文件的代码：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打包编译后的文件目录如下："><span class="nav-number">3.</span> <span class="nav-text">打包编译后的文件目录如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack-json中的命令"><span class="nav-number">4.</span> <span class="nav-text">webpack.json中的命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部分属性的配置"><span class="nav-number">5.</span> <span class="nav-text">部分属性的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#resolve的定义"><span class="nav-number">5.0.1.</span> <span class="nav-text">resolve的定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#externals配置"><span class="nav-number">5.0.2.</span> <span class="nav-text">externals配置</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
