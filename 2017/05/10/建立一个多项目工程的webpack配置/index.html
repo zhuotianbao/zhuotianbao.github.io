@@ -1,0 +1,928 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+ <link rel="shortcut icon" type="image/x-icon" href="https://eco.alipayobjects.com/cms/images/ivnpyawe/241f9607-03bb-445e-888a-b64ae3145507.jpeg" />
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="多项目  webpack配置," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://eco.alipayobjects.com/cms/images/ivnpyawe/241f9607-03bb-445e-888a-b64ae3145507.jpeg?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="之前关于webpack的配置都是用在单项目中，最近有个需求就是将两个相近的项目要整合成一个工程，抽取公共组件、公共js、公共css等等，同时要方便后面项目的扩展。这时，就要对构建工具webpack进行重新配置，以便达到后面新增项目进来仍不需更改webpack配置文件的效果。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="建立一个多项目工程的webpack配置">
+<meta property="og:url" content="http://yoursite.com/2017/05/10/建立一个多项目工程的webpack配置/index.html">
+<meta property="og:site_name" content="zhuotiabo个人博客">
+<meta property="og:description" content="之前关于webpack的配置都是用在单项目中，最近有个需求就是将两个相近的项目要整合成一个工程，抽取公共组件、公共js、公共css等等，同时要方便后面项目的扩展。这时，就要对构建工具webpack进行重新配置，以便达到后面新增项目进来仍不需更改webpack配置文件的效果。">
+<meta property="og:image" content="http://yoursite.com/webpack.jpeg">
+<meta property="og:updated_time" content="2017-05-10T06:12:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="建立一个多项目工程的webpack配置">
+<meta name="twitter:description" content="之前关于webpack的配置都是用在单项目中，最近有个需求就是将两个相近的项目要整合成一个工程，抽取公共组件、公共js、公共css等等，同时要方便后面项目的扩展。这时，就要对构建工具webpack进行重新配置，以便达到后面新增项目进来仍不需更改webpack配置文件的效果。">
+<meta name="twitter:image" content="http://yoursite.com/webpack.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6355826377324758000',
+      author: 'zhuotiabo'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/10/建立一个多项目工程的webpack配置/"/>
+
+
+
+
+
+  <title> 建立一个多项目工程的webpack配置 | zhuotiabo个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">zhuotiabo个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">不积跬步,无以至千里;不积小流,无以成江海。</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/10/建立一个多项目工程的webpack配置/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="zhuotiabo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://eco.alipayobjects.com/cms/images/ivnpyawe/241f9607-03bb-445e-888a-b64ae3145507.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="zhuotiabo个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="zhuotiabo个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                建立一个多项目工程的webpack配置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-10T10:30:53+08:00">
+                2017-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/05/10/建立一个多项目工程的webpack配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/10/建立一个多项目工程的webpack配置/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前关于webpack的配置都是用在单项目中，最近有个需求就是将两个相近的项目要整合成一个工程，抽取公共组件、公共js、公共css等等，同时要方便后面项目的扩展。这时，就要对构建工具webpack进行重新配置，以便达到后面新增项目进来仍不需更改webpack配置文件的效果。</p>
+<a id="more"></a>
+<h3 id="下面是最后想要的工程目录："><a href="#下面是最后想要的工程目录：" class="headerlink" title="下面是最后想要的工程目录："></a>下面是最后想要的工程目录：</h3><p><img src="webpack.jpeg" alt=""></p>
+<ul>
+<li>现在有OP/EVS项目，后续可能还会添加其他的项目进来</li>
+<li>项目的公共组件放在<code>components</code>目录下，公共js放在<code>utils</code>目录下，公共样式和图片放在<code>assets</code>目录下</li>
+<li>根据我们配置文件，我们访问OP项目的路径是<code>127.0.0.1:8010/op/</code>，EVS项目的路径是<code>127.0.0.1:8010/evs/</code></li>
+</ul>
+<h3 id="附上我们的webpack配置文件的代码："><a href="#附上我们的webpack配置文件的代码：" class="headerlink" title="附上我们的webpack配置文件的代码："></a>附上我们的webpack配置文件的代码：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> &#123;</div><div class="line">  resolve</div><div class="line">&#125; = <span class="built_in">require</span>(<span class="string">'path'</span>)</div><div class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>)</div><div class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>)</div><div class="line"><span class="keyword">const</span> ExtractTextPlugin = <span class="built_in">require</span>(<span class="string">'extract-text-webpack-plugin'</span>)</div><div class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>)</div><div class="line"><span class="keyword">const</span> publicPath = <span class="string">'/'</span></div><div class="line"><span class="keyword">const</span> glob = <span class="built_in">require</span>(<span class="string">'glob'</span>)  <span class="comment">//文件名匹配</span></div><div class="line"><span class="keyword">var</span> htmlPlugins = [];</div><div class="line"><span class="keyword">var</span> rewrites = [];</div><div class="line"><span class="keyword">var</span> entrys  =[];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">injectFun</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> entryPath = resolve(__dirname, <span class="string">'src'</span>)</div><div class="line">  <span class="keyword">var</span> entryFiles = glob.sync(entryPath + <span class="string">'/*/index.js'</span>)</div><div class="line">  <span class="keyword">var</span> map = &#123;&#125;;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; entryFiles.length; i++) &#123;</div><div class="line">      <span class="keyword">var</span> filePath = entryFiles[i];</div><div class="line">      <span class="keyword">var</span> pathToAry = filePath.split(<span class="string">'/'</span>);</div><div class="line">      <span class="keyword">var</span> filename = pathToAry[pathToAry.length<span class="number">-2</span>];</div><div class="line">      <span class="keyword">if</span>(filename != <span class="string">'store'</span> &amp;&amp; filename != <span class="string">'utils'</span>)&#123;</div><div class="line">        <span class="comment">//注入 入口文件</span></div><div class="line">        map[filename+<span class="string">'/index'</span>] = filePath;</div><div class="line">        entrys.push(filename+<span class="string">'/index'</span>);</div><div class="line">        <span class="comment">//注入 HtmlWebpackPlugin</span></div><div class="line">        htmlPlugins.push(</div><div class="line">          <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</div><div class="line">            <span class="attr">filename</span>:filename+<span class="string">'/index.html'</span>,</div><div class="line">            <span class="attr">template</span>: <span class="string">'./src/'</span>+filename+<span class="string">'/index.html'</span>,</div><div class="line">            <span class="attr">chunks</span>: [<span class="string">'common/manifest'</span>,<span class="string">'common/common'</span>,<span class="string">'common/echarts'</span>, filename+<span class="string">'/index'</span>]</div><div class="line">          &#125;)</div><div class="line">        )</div><div class="line">        <span class="comment">//项目路径调整devServer</span></div><div class="line">        <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'^\/'</span>+filename+<span class="string">'\/'</span>);</div><div class="line">        rewrites.push(&#123; <span class="attr">from</span>: reg, <span class="attr">to</span>: <span class="string">'/assets/'</span>+filename+<span class="string">'/index.html'</span> &#125;)</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> map;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> injectEntriy = injectFun();</div><div class="line">injectEntriy[<span class="string">'common/echarts'</span>] = <span class="string">'./src/echarts.js'</span>;</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = <span class="function">(<span class="params">options = &#123;&#125;</span>) =&gt;</span> (&#123;</div><div class="line">  <span class="attr">entry</span>:injectEntriy,</div><div class="line">  <span class="attr">output</span>: &#123;</div><div class="line">    <span class="attr">path</span>: resolve(__dirname, <span class="string">'output'</span>),</div><div class="line">    <span class="attr">filename</span>: options.dev ? <span class="string">'[name].js'</span> : <span class="string">'[name].js?[chunkhash]'</span>,</div><div class="line">    <span class="attr">chunkFilename</span>: <span class="string">'[name].js?[chunkhash]'</span>,</div><div class="line">    <span class="attr">publicPath</span>: options.dev ? <span class="string">'/assets/'</span> : publicPath</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">module</span>: &#123;</div><div class="line">    <span class="attr">rules</span>: [&#123;</div><div class="line">        <span class="attr">test</span>: <span class="regexp">/\.vue$/</span>,</div><div class="line">        <span class="attr">loader</span>: <span class="string">'vue-loader'</span>,</div><div class="line">        <span class="attr">options</span>: &#123;</div><div class="line">          <span class="attr">loaders</span>: &#123;</div><div class="line">            <span class="attr">css</span>: ExtractTextPlugin.extract(&#123;</div><div class="line">              <span class="attr">use</span>: [<span class="string">'css-loader'</span>,  <span class="string">'less-loader'</span>],</div><div class="line">              <span class="attr">fallback</span>: <span class="string">'vue-style-loader'</span> <span class="comment">// &lt;- this is a dep of vue-loader, so no need to explicitly install if using npm3</span></div><div class="line">            &#125;)</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</div><div class="line">        <span class="attr">use</span>: [<span class="string">'babel-loader'</span>],</div><div class="line">        <span class="attr">exclude</span>: <span class="regexp">/node_modules(?![\\/]vue-echarts[\\/])/</span></div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        <span class="attr">test</span>: <span class="regexp">/\.html$/</span>,</div><div class="line">        <span class="attr">use</span>: [&#123;</div><div class="line">          <span class="attr">loader</span>: <span class="string">'html-loader'</span>,</div><div class="line">          <span class="attr">options</span>: &#123;</div><div class="line">            <span class="attr">root</span>: resolve(__dirname, <span class="string">'src'</span>),</div><div class="line">            <span class="attr">attrs</span>: [<span class="string">'img:src'</span>, <span class="string">'link:href'</span>]</div><div class="line">          &#125;</div><div class="line">        &#125;]</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        <span class="attr">test</span>: <span class="regexp">/\.less$/</span>,</div><div class="line">        <span class="attr">use</span>: ExtractTextPlugin.extract(&#123;</div><div class="line">         <span class="attr">use</span>: [&#123;</div><div class="line">                    <span class="attr">loader</span>: <span class="string">"css-loader"</span></div><div class="line">                &#125;,&#123;</div><div class="line">                  <span class="attr">loader</span>:<span class="string">'postcss-loader'</span></div><div class="line">                &#125;, &#123;</div><div class="line">                    <span class="attr">loader</span>: <span class="string">"less-loader"</span></div><div class="line">                &#125;],</div><div class="line">                <span class="comment">// use style-loader in development</span></div><div class="line">                fallback: <span class="string">"style-loader"</span></div><div class="line">          &#125;)</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</div><div class="line">        <span class="attr">use</span>: ExtractTextPlugin.extract(&#123;</div><div class="line">         <span class="attr">use</span>: [&#123;</div><div class="line">                    <span class="attr">loader</span>: <span class="string">"css-loader"</span></div><div class="line">                &#125;,&#123;</div><div class="line">                  <span class="attr">loader</span>:<span class="string">'postcss-loader'</span></div><div class="line">                &#125;],</div><div class="line">                <span class="comment">// use style-loader in development</span></div><div class="line">                fallback: <span class="string">"style-loader"</span></div><div class="line">          &#125;)</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        <span class="attr">test</span>: <span class="regexp">/favicon\.png$/</span>,</div><div class="line">        <span class="attr">use</span>: [&#123;</div><div class="line">          <span class="attr">loader</span>: <span class="string">'file-loader'</span>,</div><div class="line">          <span class="attr">options</span>: &#123;</div><div class="line">            <span class="attr">name</span>: <span class="string">'[name].[ext]?[hash]'</span></div><div class="line">          &#125;</div><div class="line">        &#125;]</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        <span class="attr">test</span>: <span class="regexp">/\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/</span>,</div><div class="line">        <span class="attr">exclude</span>: <span class="regexp">/favicon\.png$/</span>,</div><div class="line">         <span class="attr">use</span>: [&#123;</div><div class="line">          <span class="attr">loader</span>: <span class="string">'file-loader'</span>,</div><div class="line">          <span class="attr">options</span>: &#123;</div><div class="line">            <span class="attr">name</span>: <span class="string">'assets/[name].[ext]?[hash]'</span></div><div class="line">          &#125;</div><div class="line">         &#125;]</div><div class="line">      &#125;</div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">plugins</span>: [</div><div class="line">    <span class="keyword">new</span> ExtractTextPlugin(&#123;</div><div class="line">        <span class="attr">filename</span>: <span class="string">'[name].css?[chunkhash]'</span>,</div><div class="line">        <span class="attr">allChunks</span>: <span class="literal">true</span></div><div class="line">    &#125;),</div><div class="line">    <span class="keyword">new</span> webpack.optimize.CommonsChunkPlugin(&#123;<span class="attr">names</span>:[<span class="string">'common/common'</span>,<span class="string">'common/echarts'</span>, entrys, <span class="string">'common/manifest'</span>]&#125;) ,</div><div class="line">  ].concat(htmlPlugins),</div><div class="line">  <span class="attr">resolve</span>: &#123;</div><div class="line">    <span class="attr">alias</span>: &#123;</div><div class="line">      <span class="string">'~'</span>: resolve(__dirname, <span class="string">'src'</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">devServer</span>: &#123;</div><div class="line">    <span class="attr">host</span>: <span class="string">'127.0.0.1'</span>,</div><div class="line">    <span class="attr">port</span>: <span class="number">8010</span>,</div><div class="line"></div><div class="line">    <span class="attr">proxy</span>: &#123;</div><div class="line">      <span class="string">'/api/'</span>: &#123;</div><div class="line">        <span class="attr">target</span>: <span class="string">'http://10.94.104.141:8008'</span>,</div><div class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</div><div class="line">        <span class="comment">// pathRewrite: &#123;</span></div><div class="line">        <span class="comment">//   '^/api': ''</span></div><div class="line">        <span class="comment">// &#125;</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">historyApiFallback</span>: &#123;</div><div class="line">      <span class="attr">index</span>: url.parse(options.dev ? <span class="string">'/assets/'</span> : publicPath).pathname,</div><div class="line">     <span class="attr">rewrites</span>: rewrites</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">devtool</span>: options.dev ? <span class="string">'#eval-source-map'</span> : <span class="string">'#source-map'</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多项目-webpack配置/" rel="tag"># 多项目  webpack配置</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/17/css垂直居中/" rel="next" title="css垂直居中">
+                <i class="fa fa-chevron-left"></i> css垂直居中
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/05/10/建立一个多项目工程的webpack配置/"
+           data-title="建立一个多项目工程的webpack配置" data-url="http://yoursite.com/2017/05/10/建立一个多项目工程的webpack配置/">
+      </div>
+    
+  </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://eco.alipayobjects.com/cms/images/ivnpyawe/241f9607-03bb-445e-888a-b64ae3145507.jpeg"
+               alt="zhuotiabo" />
+          <p class="site-author-name" itemprop="name">zhuotiabo</p>
+          <p class="site-description motion-element" itemprop="description">不积跬步,无以至千里;不积小流,无以成江海。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhuotianbao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/a-bao-94-35" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#下面是最后想要的工程目录："><span class="nav-number">1.</span> <span class="nav-text">下面是最后想要的工程目录：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附上我们的webpack配置文件的代码："><span class="nav-number">2.</span> <span class="nav-text">附上我们的webpack配置文件的代码：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhuotiabo</span>
+</div>
+
+
+<p class="right" style="margin-top: 0;">
+<span id="busuanzi_container_site_uv" style="display: none;">
+您好，您是本站点的第 <span id="busuanzi_value_site_uv" style="color: red;"></span> 位访客，祝您生活工作愉快
+</span></p>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">本站访客数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv">本站总访问量<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhuotianbao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
